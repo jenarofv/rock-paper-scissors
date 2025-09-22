@@ -1,7 +1,3 @@
-
-let humanScore = 0;
-let computerScore = 0;
-
 function getComputerChoice() {
   const choices = ["rock", "paper", "scissors"];
   computerChoiceNum = Math.floor(Math.random() * 3);
@@ -13,10 +9,10 @@ function getHumanChoice() {
   return humanChoice.toLowerCase();
 }
 
-function playRound(humanChoice, computerChoice) {
+function playRound(humanChoice, computerChoice, humanScore = 0, computerScore = 0) {
   if (humanChoice === computerChoice) {
     console.log("Tie, you both chose " + humanChoice);
-    return;
+    return {human: humanScore, computer: computerScore};
   }
   const verbs = {
     // how does each one win?
@@ -46,4 +42,18 @@ function playRound(humanChoice, computerChoice) {
     console.log(`Computer wins, ${computerChoice} ${verbs[computerChoice]} ${humanChoice}`);
     computerScore++;
   }
+  return {human: humanScore, computer: computerScore};
 }
+
+function playGame() {
+  let scores = {human: 0, computer: 0};
+  for (let i = 0; i < 5; i++){
+    humanChoice = getHumanChoice();
+    computerChoice = getComputerChoice();
+    scores = playRound(humanChoice, computerChoice, humanScore = scores.human, computerScore = scores.computer);
+  }
+
+  console.log(`final score: you: ${scores.human} computer ${scores.computer}.`)
+}
+
+playGame();
