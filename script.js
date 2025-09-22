@@ -35,6 +35,9 @@ function playRound(humanChoice, computerChoice) {
     case "scissors":
       humanWins = computerChoice === "paper";
       break;
+    default:
+      console.log(`choice ${humanChoice} not valid.`);
+      return;
   }
   if (humanWins) {
     console.log(`You won! ${humanChoice} ${verbs[humanChoice]} ${computerChoice}`);
